@@ -82,7 +82,7 @@ First lets see an abstraction of a `package.json` file
     "test": "npm-run-all eslint stylelint",
     "test": "npm-run-all eslint stylelint",
     "eslint": "eslint --cache --fix ./",
-    "stylelint": "stylelint '**/*.scss' --syntax scss"
+    "stylelint": "stylelint \"**/*.scss\" --syntax scss"
   }
 }
 ```
@@ -94,7 +94,7 @@ We can right above
   "scripts": {
     "test": "npm-run-all lint:*",
     "lint:js": "eslint --cache --fix ./",
-    "lint:css": "stylelint '**/*.scss' --syntax scss",
+    "lint:css": "stylelint \"**/*.scss\" --syntax scss",
     "lint:css:fix": "stylefmt -R src/"
   }
 }
@@ -107,7 +107,7 @@ The `*` indicates `npm` will run any `script` that matches the pattern. In this 
   "scripts": {
     "test": "npm-run-all lint:**",
     "lint:js": "eslint --cache --fix ./",
-    "lint:css": "stylelint '**/*.scss' --syntax scss",
+    "lint:css": "stylelint \"**/*.scss\" --syntax scss",
     "lint:css:fix": "stylefmt -R src/"
   }
 }
@@ -165,7 +165,7 @@ Not all executables support `watch` option in that cases we can use [onchange](h
 ```json
 {
   "scripts": {
-    "watch:lint": "onchange '**/*.js' -- npm run lint",
+    "watch:lint": "onchange \"**/*.js\" -- npm run lint",
     "lint": "eslint --cache --fix ./"
   }
 }
@@ -188,7 +188,18 @@ We reference a variable just using the `$` symbol.
 
 In this sample when we run the `start` script it will run the code in `index.js` file. Also we can use any environment variable.
 
-Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+Reference: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+
+**Note**: If we want to use the `$` symbol in windows that will fail we need to use a cross environment way to do it. There is a package [cross-var](https://www.npmjs.com/package/cross-var), so the final result of the last sample will be:
+
+```json
+{
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-var \"node $npm_package_main\""
+  }
+}
+```
 
 ## How to use custom config settings in your npm scripts
 
@@ -199,9 +210,76 @@ Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/
     "domain": "localhost:8000"
   },
   "scripts": {
-    "start": "node $npm_package_main --domain $npm_package_config_domain"
+    "start": "cross-var \"node $npm_package_main --domain $npm_package_config_domain\""
   }
 }
 ```
 
 Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+
+you can override a config value:
+
+```cmd
+npm config set the-name-of-the-package:variable-to-override new-value
+```
+
+we can list all the overrides configuration variables with:
+
+```cmd
+npm config list
+```
+
+If we want to delete an override we just run:
+
+```cmd
+npm config delete the-name-of-the-package:override-variable-name-to-delete
+```
+
+## How to run npm scripts with git hooks
+
+Note: More information in [Prevent Bad Commits with husky](https://davidwalsh.name/prevent-bad-commits-husky)
+
+
+## How to change the level of console output when running npm scripts
+
+We can accomplish that using `-s` flag. This flag is use when you want to run a script silently.
+
+```cmd
+npm run script-command -s
+```
+
+There other flags that we can use, please see [this reference](https://docs.npmjs.com/misc/config#loglevel) and [this one](https://docs.npmjs.com/misc/config#shorthands-and-other-cli-niceties) to see the list.
+
+## How to make npm scripts cross-environment friendly
+
+if want to use environment variable in a cross environment way we can use [cross-env](https://www.npmjs.com/package/cross-env) package to define environment variables in our scripts.
+
+A sample to how to use it
+
+```json
+{
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
+  }
+}
+```
+
+and If we want to delete using a similar approach we can use [rimraf](https://www.npmjs.com/package/rimraf) instead of `rm -rf`.
+
+```json
+{
+  "scripts": {
+    "clean": "rimraf folder-to-clean"
+  }
+}
+```
+
+If we use the `open` command we can use [opn-cli](https://www.npmjs.com/package/opn-cli) package that provide a similar approach in a cross environment way
+
+```json
+{
+  "scripts": {
+    "opensite": "opn some-folder/index.html"
+  }
+}
+```
