@@ -1,4 +1,4 @@
-# Notes aboit `npm`
+# Notes about `npm`
 
 ## How to initialize an node package with `npm`
 
@@ -157,3 +157,51 @@ We use the `|` character
 
 Note: More information in [How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/) search for *Streaming to multiple tasks*.
 
+## How to run npm scripts when files change with `onchange`
+
+Not all executables support `watch` option in that cases we can use [onchange](https://www.npmjs.com/package/onchange)
+
+
+```json
+{
+  "scripts": {
+    "watch:lint": "onchange '**/*.js' -- npm run lint",
+    "lint": "eslint --cache --fix ./"
+  }
+}
+```
+
+In this case we are watching all the `js` files and when something change in any of those files it will run the `lint` script
+
+## How to use package.json variables in npm scripts
+
+We reference a variable just using the `$` symbol.
+
+```json
+{
+  "main": "index.js",
+  "scripts": {
+    "start": "node $npm_package_main"
+  }
+}
+```
+
+In this sample when we run the `start` script it will run the code in `index.js` file. Also we can use any environment variable.
+
+Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+
+## How to use custom config settings in your npm scripts
+
+```json
+{
+  "main": "index.js",
+  "config": {
+    "domain": "localhost:8000"
+  },
+  "scripts": {
+    "start": "node $npm_package_main --domain $npm_package_config_domain"
+  }
+}
+```
+
+Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
