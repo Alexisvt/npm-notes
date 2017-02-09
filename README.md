@@ -80,6 +80,7 @@ First lets see an abstraction of a `package.json` file
 {
   "scripts": {
     "test": "npm-run-all eslint stylelint",
+    "test": "npm-run-all eslint stylelint",
     "eslint": "eslint --cache --fix ./",
     "stylelint": "stylelint '**/*.scss' --syntax scss"
   }
@@ -111,3 +112,48 @@ The `*` indicates `npm` will run any `script` that matches the pattern. In this 
   }
 }
 ```
+
+## How to run pre and post scripts
+
+We just create scripts and we need to prefix the names of the scripts with `pre` or `post`
+
+```json
+{
+  "scripts": {
+    "pretest": "npm run run-this-before-test",
+    "test": "npm-run-all eslint stylelint",
+    "eslint": "eslint --cache --fix ./",
+    "posteslint": "npm run run-this-after-eslint"
+  }
+}
+```
+
+## How to pass arguments to npm scripts
+
+```json
+{
+  "scripts": {
+    "script1": "npm run script2 -- --watch",
+    "script2": "npm run someCommand"
+  }
+}
+```
+
+`npm` will pass all the arguments after the `--` directly to `script2`
+
+**Note**: more information in [npm-run-script docs](https://docs.npmjs.com/cli/run-script)
+
+## How to pipe data from one npm script to another
+
+We use the `|` character
+
+```json
+{
+  "scripts": {
+    "script1": "npm run a | npm run b-with-the-passing-data-of-a | npm run so-on"
+  }
+}
+```
+
+Note: More information in [How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/) search for *Streaming to multiple tasks*.
+
