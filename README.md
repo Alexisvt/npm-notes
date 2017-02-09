@@ -14,7 +14,7 @@ npm init -y
 
 That command will basically say **yes** to all the questions
 
-## How to see all the available script commands in the `package.json` file
+## How to see all available script commands in the `package.json` file
 
 ```cmd
 npm run
