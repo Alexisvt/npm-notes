@@ -20,6 +20,8 @@ That command will basically say **yes** to all the questions
 npm run
 ```
 
+The other way to see all the script commands is to install [ntl](https://www.npmjs.com/package/ntl) globally then run `ntl` command inside the project, the result will be a nice menu where you can choose which script task run.
+
 ## How to know where `npm` will install the executables
 
 ```cmd
