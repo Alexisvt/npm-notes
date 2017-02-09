@@ -71,3 +71,43 @@ The above is how the final script will looks like and the next one is how to run
 ```cmd
 npm-run-all script1 script2
 ```
+
+## How to run a set of similar npm scripts with a wildcard
+
+First lets see an abstraction of a `package.json` file
+
+```json
+{
+  "scripts": {
+    "test": "npm-run-all eslint stylelint",
+    "eslint": "eslint --cache --fix ./",
+    "stylelint": "stylelint '**/*.scss' --syntax scss"
+  }
+}
+```
+
+We can right above
+
+```json
+{
+  "scripts": {
+    "test": "npm-run-all lint:*",
+    "lint:js": "eslint --cache --fix ./",
+    "lint:css": "stylelint '**/*.scss' --syntax scss",
+    "lint:css:fix": "stylefmt -R src/"
+  }
+}
+```
+
+The `*` indicates `npm` will run any `script` that matches the pattern. In this case will run `lint:js` and `lint:css` but not the `lint:css:fix`. If we want to match all we use instead:
+
+```json
+{
+  "scripts": {
+    "test": "npm-run-all lint:**",
+    "lint:js": "eslint --cache --fix ./",
+    "lint:css": "stylelint '**/*.scss' --syntax scss",
+    "lint:css:fix": "stylefmt -R src/"
+  }
+}
+```
