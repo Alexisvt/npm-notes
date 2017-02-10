@@ -56,7 +56,7 @@ If `eslint` fail the process stop right there and it will not continue to `somet
 
 ## How to run scripts in parallel
 
-We use a single `$`:
+We use a single `&`:
 
 ```cmd
 npm run script1 & npm run script2 & wait
