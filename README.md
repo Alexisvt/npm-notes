@@ -261,7 +261,7 @@ A sample to how to use it
 ```json
 {
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js"
+    "build": "cross-env \"NODE_ENV=production webpack --config build/webpack.config.js\""
   }
 }
 ```
