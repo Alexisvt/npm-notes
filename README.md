@@ -64,15 +64,33 @@ npm run script1 & npm run script2 & wait
 
 **Note**: It's important to end with `& wait` to allow to cancel all the process with `control + c`. Also we can install packages to allow this for example [npm-run-all](https://www.npmjs.com/package/npm-run-all)
 
+### Using `npm-run-all` tool
+
+To run scripts parallel we can use `npm-run-all --parallel` or `run-p` shorthand:
+
 ```cmd
 npm-run-all --parallel script1 script2
 ```
 
-The above is how the final script will looks like and the next one is how to run the scripts in series using `npm-run-all` tool
+Parallel shorthand way:
+
+```cmd
+run-p script1 script2
+```
+
+The next one is how to run the scripts in series using `npm-run-all` or `run-s` shorthand:
 
 ```cmd
 npm-run-all script1 script2
 ```
+
+Serie shorthand way:
+
+```cmd
+run-s script1 script2
+```
+
+**Note**: If we want more info about the usage of `npm-run-all` please go the [npm-rull-all documentation](https://www.npmjs.com/package/npm-run-all#-usage)
 
 ## How to run a set of similar npm scripts with a wildcard
 
