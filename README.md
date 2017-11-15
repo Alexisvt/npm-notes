@@ -1,5 +1,11 @@
 # Notes about `npm`
 
+## How to list globally installed `npm` packages and versions
+
+```cmd
+npm list -g --depth=0
+```
+
 ## How to initialize an node package with `npm`
 
 ```cmd
@@ -13,6 +19,20 @@ npm init -y
 ```
 
 That command will basically say **yes** to all the questions
+
+## How to run locally installed binarie tools
+
+Fist we need to install [npx](https://www.npmjs.com/package/npx) globally, then we need to go our node project and run the next command:
+
+```cmd
+npx eslint
+```
+
+Here we assuming the we have `eslint` package installed, when we run this command we are executing the `eslint` executable without passing the path of it, just easy as that.
+
+More reference: [Introducing npx: an npm package runner](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
+
+**Note**: According to the above article this executable comes with with npm version 5.2.0 by default.
 
 ## How to see all available script commands in the `package.json` file
 
