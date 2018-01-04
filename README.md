@@ -292,7 +292,7 @@ There other flags that we can use, please see [this reference](https://docs.npmj
 
 ## How to make npm scripts cross-environment friendly
 
-if want to use environment variable in a cross environment way we can use [cross-env](https://www.npmjs.com/package/cross-env) package to define environment variables in our scripts.
+If want to use environment variable in a cross environment way we can use [cross-env](https://www.npmjs.com/package/cross-env) package to define environment variables in our scripts.
 
 A sample to how to use it
 
