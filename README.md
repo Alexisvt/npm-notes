@@ -6,7 +6,7 @@
 npm list -g --depth=0
 ```
 
-## How to initialize an node package with `npm`
+## How to initialize a node package with `npm`
 
 ```cmd
 npm init
@@ -22,7 +22,7 @@ That command will basically say **yes** to all the questions
 
 ## How to run locally installed binarie tools
 
-Fist we need to install [npx](https://www.npmjs.com/package/npx) globally, then we need to go our node project and run the next command:
+Fist we need to install [npx](https://www.npmjs.com/package/npx) globally, then we need to go inside our node project folder and run the next command:
 
 ```cmd
 npx eslint
@@ -54,9 +54,9 @@ If we want to know where `npm` install the executables globally we use instead:
 npm bin -g
 ```
 
-More reference: [npm bin documentation](https://docs.npmjs.com/cli/bin)
+Reference: [npm bin documentation](https://docs.npmjs.com/cli/bin)
 
-## How to see the all the environment values availables
+## How to see the all the environment values available
 
 ```cmd
 npm run env
@@ -82,7 +82,7 @@ We use a single `&`:
 npm run script1 & npm run script2 & wait
 ```
 
-**Note**: It's important to end with `& wait` to allow to cancel all the process with `control + c`. Also we can install packages to allow this for example [npm-run-all](https://www.npmjs.com/package/npm-run-all)
+**Note**: It's important to end with `& wait` to allow to cancel all the process with `Control + C`. Also we can install packages to allow this for example [npm-run-all](https://www.npmjs.com/package/npm-run-all)
 
 ### Using `npm-run-all` tool
 
@@ -120,14 +120,13 @@ First lets see an abstraction of a `package.json` file
 {
   "scripts": {
     "test": "npm-run-all eslint stylelint",
-    "test": "npm-run-all eslint stylelint",
     "eslint": "eslint --cache --fix ./",
     "stylelint": "stylelint \"**/*.scss\" --syntax scss"
   }
 }
 ```
 
-We can right above
+We can change the above with:
 
 ```json
 {
@@ -153,9 +152,9 @@ The `*` indicates `npm` will run any `script` that matches the pattern. In this 
 }
 ```
 
-## How to run pre and post scripts
+## How to run scripts before or after another
 
-We just create scripts and we need to prefix the names of the scripts with `pre` or `post`
+We prefix the names of the scripts with `pre` or `post`
 
 ```json
 {
@@ -190,16 +189,16 @@ We use the `|` character
 ```json
 {
   "scripts": {
-    "script1": "npm run a | npm run b-with-the-passing-data-of-a | npm run so-on"
+    "script1": "npm run a | npm run b-with-passing-data-from-a | npm run so-on"
   }
 }
 ```
 
-Note: More information in [How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool/) search for *Streaming to multiple tasks*.
+Note: More information in [How to Use npm as a Build Tool](https://www.keithcirkel.co.uk/how-to-use-npm-as-a-build-tool) search for *Streaming to multiple tasks*.
 
 ## How to run npm scripts when files change with `onchange`
 
-Not all executables support `watch` option in that cases we can use [onchange](https://www.npmjs.com/package/onchange)
+Not all executables support `watch` option, in that cases we can use [onchange](https://www.npmjs.com/package/onchange)
 
 
 ```json
@@ -228,9 +227,9 @@ We reference a variable just using the `$` symbol.
 
 In this sample when we run the `start` script it will run the code in `index.js` file. Also we can use any environment variable.
 
-Reference: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+Reference: Sample from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
 
-**Note**: If we want to use the `$` symbol in windows that will fail we need to use a cross environment way to do it. There is a package [cross-var](https://www.npmjs.com/package/cross-var), so the final result of the last sample will be:
+**Note**: If we want to use the `$` symbol in Windows that will fail we need to use a cross environment way to do it. There is a package [cross-var](https://www.npmjs.com/package/cross-var), so the final result of the last sample will be:
 
 ```json
 {
@@ -255,24 +254,25 @@ Reference: The sample was taken from [variables in npm scripts](http://ianmcnall
 }
 ```
 
-Note: The sample was taken from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
+Reference: Sample from [variables in npm scripts](http://ianmcnally.me/blog/2016/2/4/variables-in-npm-scripts)
 
-you can override a config value:
 
-```cmd
-npm config set the-name-of-the-package:variable-to-override new-value
-```
-
-we can list all the overrides configuration variables with:
+We can list all configuration variables with:
 
 ```cmd
 npm config list
 ```
 
+You can override a config value with:
+
+```cmd
+npm config set <key> <new-value>
+```
+
 If we want to delete an override we just run:
 
 ```cmd
-npm config delete the-name-of-the-package:override-variable-name-to-delete
+npm config delete <key>
 ```
 
 ## How to run npm scripts with git hooks
@@ -282,13 +282,13 @@ Note: More information in [Prevent Bad Commits with husky](https://davidwalsh.na
 
 ## How to change the level of console output when running npm scripts
 
-We can accomplish that using `-s` flag. This flag is use when you want to run a script silently.
+We can accomplish this using `-s` silent flag to minimize the console output.
 
 ```cmd
 npm run script-command -s
 ```
 
-There other flags that we can use, please see [this reference](https://docs.npmjs.com/misc/config#loglevel) and [this one](https://docs.npmjs.com/misc/config#shorthands-and-other-cli-niceties) to see the list.
+There are other flags that we can use, please see [this reference](https://docs.npmjs.com/misc/config#loglevel) and [this one](https://docs.npmjs.com/misc/config#shorthands-and-other-cli-niceties) to see the list.
 
 ## How to make npm scripts cross-environment friendly
 
@@ -304,7 +304,7 @@ A sample to how to use it
 }
 ```
 
-and If we want to delete using a similar approach we can use [rimraf](https://www.npmjs.com/package/rimraf) instead of `rm -rf`.
+and if we want to delete using a similar approach we can use [rimraf](https://www.npmjs.com/package/rimraf) instead of `rm -rf`.
 
 ```json
 {
