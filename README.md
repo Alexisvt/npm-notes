@@ -64,6 +64,12 @@ npm run env
 
 The env script is a special built-in command that can be used to list environment variables that will be available to the script at runtime. If an "env" command is defined in your package it will take precedence over the built-in.
 
+If we are using bash, we can run the next command to filtering the result:
+
+```cmd
+npm run env | grep npm
+```
+
 ## How to run scripts in series in `npm`
 
 We use `&&` to concat the scripts like this:
@@ -323,3 +329,52 @@ If we use the `open` command we can use [opn-cli](https://www.npmjs.com/package/
   }
 }
 ```
+
+## How to list the local installed packages
+
+```cmd
+npm ls name-of-package
+```
+
+The ouput will let us know if the package exists or not. If we want to search for a package globally, the only thing that we need to do is to run the same command but with `-g` at the end.
+
+## How to check the version of a Node Module
+
+```cmd
+npm v create-react-app version
+```
+
+The above command will check the current version of `create-react-app`, if we want to see all the versions available, we can run:
+
+```cmd
+npm v create-react-app version
+```
+
+Or if we want to see the different versions but seeing also the tags, run:
+
+```cmd
+npm v create-react-app
+```
+
+## How to install node packages using shortcuts
+
+To install a package to the `dependencies` property, we use `-S`
+
+```cmd
+npm i eslint -S
+
+```
+
+If we want to install a node package but this time to `devDependencies` property use `-D` instead
+
+```cmd
+npm i eslint -D
+```
+
+If we are in `bash` we can install multiple packages using bash brace expansion:
+
+```cmd
+npm i babel{-cli,-preset-env,-plugin-trasform-object-rest-spread} -Ds
+```
+
+This time we are using `Ds` to keep the log in silence mode.
