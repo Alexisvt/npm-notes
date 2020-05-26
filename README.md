@@ -378,3 +378,20 @@ npm i babel{-cli,-preset-env,-plugin-trasform-object-rest-spread} -Ds
 ```
 
 This time we are using `Ds` to keep the log in silence mode.
+
+## How to install a dependency without modify the `package.json` file
+
+If we want to install something without modify the `package.json` file we use the `--no-save` flag:
+
+```cmd
+npm i my-package --no-save
+```
+
+If we want to only modify the `package.json` but not the `package.lock.json` file, we use `--no-shrinkwrap`:
+
+```cmd
+npm i my-package --no-shrinkwrap
+```
+
+References:
+* [npm doc](https://docs.npmjs.com/files/package-locks#using-locked-packages)
